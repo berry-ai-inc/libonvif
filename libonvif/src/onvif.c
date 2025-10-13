@@ -2803,6 +2803,7 @@ void getUUID(char uuid_buf[47]) {
 int broadcast(struct OnvifSession *onvif_session) {
     strcpy(preferred_network_address, onvif_session->preferred_network_address);
     struct sockaddr_in broadcast_address;
+    struct sockaddr_in listen_address;
     int broadcast_socket;
     char broadcast_message[1024] = {0};
     unsigned int address_size;
@@ -2820,6 +2821,14 @@ int broadcast(struct OnvifSession *onvif_session) {
         for (int j=0; j<8192; j++) {
             onvif_session->buf[k][j] = '\0';
         }
+    }
+
+    memset((char *) &listen_address, 0, sizeof(listen_address));
+    listen_address.sin_family = AF_INET;
+    listen_address.sin_port = htons(3702);
+    listen_address.sin_addr.s_addr = inet_addr(preferred_network_address);;
+    if (bind(broadcast_socket, (struct sockaddr *)&listen_address, sizeof(listen_address)) < 0) {
+        //error
     }
 
     memset((char *) &broadcast_address, 0, sizeof(broadcast_address));
