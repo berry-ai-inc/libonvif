@@ -2825,7 +2825,7 @@ int broadcast(struct OnvifSession *onvif_session) {
 
     memset((char *) &listen_address, 0, sizeof(listen_address));
     listen_address.sin_family = AF_INET;
-    listen_address.sin_port = htons(3702);
+    listen_address.sin_port = htons(7404);
     listen_address.sin_addr.s_addr = inet_addr(preferred_network_address);;
     if (bind(broadcast_socket, (struct sockaddr *)&listen_address, sizeof(listen_address)) < 0) {
         //error
