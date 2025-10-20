@@ -35,7 +35,7 @@
 #endif
 
 int longopt = 0;
-#define VERSION "1.4.8"
+#define VERSION "1.4.8-fixport7404"
 
 static struct option longopts[] = {
 	{ "user",       required_argument, NULL,      'u'},
